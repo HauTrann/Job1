@@ -1,0 +1,32 @@
+.float-right {
+  float: right !important;
+}
+
+.css-close {
+  background: transparent;
+  border: none;
+}
+
+.page-link {
+  height: 100% !important;
+}
+
+.max-h-50 {
+  max-height: 50px;
+}
+.css-img {
+  height: 120px;
+}
+
+.border-bottom-dotted {
+  border-bottom: 1px dotted #ced4da;
+}
+.btn-theme {
+  color: #fff;
+  background: linear-gradient(148deg, #00a950, #0d6b39);
+  border: none;
+}
+
+.theme-color {
+  color: #00a950;;
+}

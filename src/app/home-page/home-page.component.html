@@ -1,1 +1,335 @@
-<p>home-page works!</p>
+<!--<header class="masthead bg-white text-black text-center">-->
+<header class="">
+  <!-- Masthead-->
+  <ng-particles [id]="id" [options]="options" (particlesLoaded)="particlesLoaded($event)" (particlesInit)="particlesInit($event)">
+  </ng-particles>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg bg-transparent text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+          <img src="assets/img/logo/logo_transparent_background.png" class="css-logo" alt="AZCLUB Logo">
+<!--      <a class="navbar-brand text-black" href="#page-top">Blue ridge</a>-->
+      <button class="navbar-toggler text-uppercase font-weight-bold bg-dark text-black rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded text-black" href="#about">About</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded text-black" href="#network">Network</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded text-black" href="#service">Service</a></li>
+          <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded text-black" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+<section class="page-section bg-white text-white mb-0 pading-0" id="header">
+  <div class="container text-black">
+    <div class="container css-header">
+      <!-- Masthead Avatar Image-->
+      <div class="divider-custom divider-light h-250px">
+        <img class="masthead-avatar w-100 left-decoration" src="assets/img/logo/logo_transparent_background.png" alt="..." />
+      </div>
+      <!-- Masthead Heading-->
+      <!--    <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>-->
+      <!-- Icon Divider-->
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">DECENTRALIZING THE FUTURE</div>
+        <div class="divider-custom-line"></div>
+      </div>
+      <!-- Masthead Subheading-->
+      <div class="divider-custom divider-light">
+        <p class="text-header w-500">AZCLUB is a decentralized organization providing you with validation and staking services, blockchain consultation, growth acceleration and investment capital for innovative Web 3.0 projects.</p>
+      </div>
+      <a class="btn-custom text-uppercase" href="#about">
+        LEARN MORE
+      </a>
+    </div>
+  </div>
+</section>
+<!-- About Section-->
+<section class="page-section bg-white text-white mb-0" id="about">
+  <div class="container">
+    <!-- Network Section Heading-->
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-5">About</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-6 mb-8 pd-3">
+        <div class="left-decoration">
+          <img class="masthead-avatar relative-img w-100" src="assets/img/about/about-img.jpg" alt="..." />
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 mb-5 pd-3">
+        <div class="text-black">
+          <p class="sub-text">Worldwide team of 8</p>
+          <h2>Your Trusted Validator<br> For Your Favorite Project</h2>
+          <p class="p-about">We are AZCLUB ~ Pangaea Operations. A group of 8 highly qualified technology enthusiasts, located across the globe. We are a decentralized organization, passionate about Web 3.0, distributed ledger technology (DLT) and decentralization.<br><br>
+            With a combined 40+ years of experience in blockchain, AZCLUB has come to light in early 2019 as a community initiative around Harmony protocol. Since then, we have become an extended team of Harmony whilst expanding our services to other networks and projects. We are specialized in running validators for several networks, while also providing consultation, growth acceleration and funding to new and innovative Web 3.0 projects.
+          </p>
+          <a class="btn-custom text-uppercase" href="#contact">CONTACT US</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Network Section-->
+<section class="page-section network" id="network">
+  <div class="container">
+    <!-- Network Section Heading-->
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-5">Network</h2>
+    <!-- Network Grid Items-->
+    <div *ngIf="netWorks" class="row justify-content-center">
+      <!-- Network Item 1-->
+      <div *ngFor="let item of netWorks" class="col-md-6 col-lg-3 mb-5" (click)="openPopup(detailNetwork, item)">
+        <div class="network-item mx-auto" data-bs-toggle="modal" (click)="slectItem(item)">
+
+          <img [style.background]="item.BACKGROUND?item.BACKGROUND:''" class="css-img" src="{{item.ICON}}" alt="..." />
+
+          <h3 class="mt-2 text-name-network">{{item.NAME}}</h3>
+          <p class="mt-2"><span [class.dot]="item.STATUS === 'A'" [class.dot-disable]="item.STATUS !== 'A'"></span> {{item.STATUSNAME}}</p>
+          <p *ngIf="item.STATUS === 'A'" class="mt-2 text-network">{{item.EXPECTEDAPY + '%'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Service Section-->
+<section class="page-section bg-white text-black mb-0" id="service">
+  <div class="container">
+    <!-- Network Section Heading-->
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-5">Service</h2>
+    <!-- Network Grid Items-->
+    <div class="row justify-content-center">
+      <!-- Network Item 1-->
+      <div class="col-md-6 col-lg-4 mb-5 text-center">
+        <div class="col-content">
+          <div class="service-box">
+            <img src="assets/img/service/service-icon-1.png" alt="Service Icon">
+            <h3>Blockchain Consultancy</h3>
+            <p>Our years of expertise enable us to consult on both technical and economical aspects of a project.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Network Item 1-->
+      <div class="col-md-6 col-lg-4 mb-5 text-center">
+        <div class="col-content">
+          <div class="service-box">
+            <img src="assets/img/service/service-icon-2.png" alt="Service Icon">
+            <h3>Investment Capital</h3>
+            <p>We provide funding, support, community presence and advisory to the next generation of Web 3.0 projects.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Network Item 1-->
+      <div class="col-md-6 col-lg-4 mb-5 text-center">
+        <div class="col-content">
+          <div class="service-box">
+            <img src="assets/img/service/service-icon-3.png" alt="Service Icon">
+            <h3>Growth Acceleration</h3>
+            <p>We help projects grow their user base, refine business development and connect them with potential business partners.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Network Item 1-->
+      <div class="col-md-6 col-lg-4 mb-5 text-center">
+        <div class="col-content">
+          <div class="service-box">
+            <img src="assets/img/service/service-icon-4.png" alt="Service Icon">
+            <h3>Toolings</h3>
+            <p>We build and maintain tools such as explorers, faucets and RPC endpoints for your favourite Web 3.0 projects.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Network Item 1-->
+      <div class="col-md-6 col-lg-4 mb-5 text-center">
+        <div class="col-content">
+          <div class="service-box">
+            <img src="assets/img/service/service-icon-5.png" alt="Service Icon">
+            <h3>White Labels</h3>
+            <p>Use our expertise and your brand to run your own validator safely and securely, without a worry.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Network Item 1-->
+      <div class="col-md-6 col-lg-4 mb-5 text-center">
+        <div class="col-content">
+          <div class="service-box">
+            <img src="assets/img/service/service-icon-6.png" alt="Service Icon">
+            <h3>Blockchain Consultancy</h3>
+            <p>Our years of expertise enable us to consult on both technical and economical aspects of a project.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Section-->
+<section class="page-section" id="contact">
+  <div class="container">
+    <!-- Contact Section Heading-->
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-5">Contact Me</h2>
+    <!-- Contact Section Form-->
+    <div class="row justify-content-center">
+      <div  class="col-md-6 col-lg-6 mb-5">
+        <!-- to get an API token!-->
+        <form *ngIf="formSend" [formGroup]="formSend" id="contactForm">
+          <!-- Name input-->
+          <div class="form-floating mb-3">
+            <input formControlName="FULLNAME" class="form-control h-80" id="FULLNAME" type="text" placeholder="Enter your name..." />
+            <label for="FULLNAME">Full name</label>
+            <div *ngIf="submitContract && formSend.controls.FULLNAME.errors?.required" class="invalid-feedback-cus">A name is required.</div>
+          </div>
+          <!-- Email address input-->
+          <div class="form-floating mb-3">
+            <input formControlName="EMAIL" class="form-control h-80" id="email" type="email" placeholder="name@example.com" data-sb-validations="email" />
+            <label for="email">Email address</label>
+            <div class="invalid-feedback-cus" *ngIf="submitContract && formSend.controls.EMAIL.errors?.required">An email is required.</div>
+            <div class="invalid-feedback-cus" *ngIf="submitContract && formSend.controls.EMAIL.errors?.pattern">Email is not valid.</div>
+          </div>
+          <!-- Phone number input-->
+          <div class="form-floating mb-3">
+            <input formControlName="PHONE" class="form-control h-80" id="phone" type="tel" placeholder="(123) 456-7890"  />
+            <label for="phone">Phone number</label>
+            <div class="invalid-feedback-cus" *ngIf="submitContract && formSend.controls.PHONE.errors?.required">A phone number is required.</div>
+          </div>
+          <!-- Message input-->
+          <div class="form-floating mb-3">
+            <textarea formControlName="MESSAGE" class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" ></textarea>
+            <label for="message">Message</label>
+            <div class="invalid-feedback-cus" *ngIf="submitContract && formSend.controls.MESSAGE.errors?.required">A message is required.</div>
+          </div>
+          <!-- Submit success message-->
+          <!---->
+          <!-- This is what your users will see when the form-->
+          <!-- has successfully submitted-->
+          <div class="d-none" id="submitSuccessMessage">
+            <div class="text-center mb-3">
+              <div class="fw-bolder">Form submission successful!</div>
+              To activate this form, sign up at
+            </div>
+          </div>
+          <!-- Submit error message-->
+          <!-- an error submitting the form-->
+          <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+          <!-- Submit Button-->
+          <button (click)="submitSend()" class="btn-custom text-uppercase btn-xl disabled" id="submitButton" type="submit">Send A MESSAGE</button>
+        </form>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-5">
+          <a class="fter" href="https://github.com/pops-one" target="_blank"><img src="assets/img/icon/git-icon.png" class="pr-5" alt="Github icon">Github</a>
+          <a class="fter" href="https://twitter.com/POpsTeam1" target="_blank"><img src="assets/img/icon/twitter-icon.png" class="pr-5" alt="Twitter icon">Twitter</a>
+          <a class="fter" href="https://t.me/POPS_Team_Validator" target="_blank"><img src="assets/img/icon/telegram-icon.png" class="pr-5" alt="Telegram icon">Telegram</a>
+          <a class="fter" href="https://discord.com/invite/yatAvEW7jd" target="_blank"><img src="assets/img/icon/discord-icon.png" class="pr-5" alt="Discord icon">Discord</a>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-5">
+        <div class="fter">
+          <img class=" w-fill w-100" src="assets/img/logo/logo_transparent_background.png" alt="AZCLUB Logo">
+          <p class=text-center>© All right reserved 2021.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Network Modals-->
+<div class="network-modal modal fade" *ngIf="itemSlect" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <img class="css-img" src="{{itemSlect.ICON}}" alt="..." />
+        <h2 class="text-name-network pd-l-20">{{itemSlect.NAME + '(' + itemSlect.CODE + ')'}}</h2>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center pb-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="row justify-content-center">
+              <div class="col-md-6 col-lg-6 mb-8 row justify-content-center">
+                <div class=" col-lg-3">
+                  <p class="mb-4">cscscascasc</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="mb-4">cscscascasc</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="mb-4">cscscascasc</p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="mb-4">cscscascasc</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6 mb-8 ">
+                <p class="mb-4">cscscascasc</p>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <button class="btn btn-primary" href="#!" data-bs-dismiss="modal">
+                <i class="fas fa-times fa-fw"></i>
+                Close Window
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Network Modal 2-->
+
+<ng-template #detailNetwork>
+  <div class="modal-header">
+    <img class="css-img" src="{{itemSlect.ICON}}" alt="..." />
+    <h2 class="text-name-network pd-l-20">{{itemSlect.NAME + '   (' + itemSlect.CODE + ')'}}</h2>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closePoup()">
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-6 mb-5">
+          <div class="row justify-content-center validator-name">
+            <div class="col-md-6 col-lg-4 ">
+              <span>Expected APY</span>
+              <p class="">{{itemSlect.EXPECTEDAPY}}</p>
+            </div>
+            <div class="col-md-6 col-lg-4 ">
+              <span>Commission</span>
+              <p>{{itemSlect.COMMISSION}}</p>
+            </div>
+            <div class="col-md-6 col-lg-4 ">
+              <!--<span>Token Price</span>
+              <p>{{itemSlect.TOKENPRICE}}</p>-->
+            </div>
+            <div class="col-md-6 col-lg-12 ">
+              <span>Total Amount Delegated</span>
+              <p>{{itemSlect.TOTALAMOUNT + ' ' + itemSlect.CODE}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-lg-6 mb-5">
+          <div class="container">
+            <div *ngFor="let item of links; let i = index;" class="row justify-content-center mb-2">
+              <a class="col-md-6 col-lg-12 link-token  pading-l-70" [class.web-con]="i===0" [class.doc-icon]="i!==0" href="{{item.LINK}}" target="_blank">
+                <p>{{item.LINK}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div *ngFor="let item of linksAddress; let i = index;" class="row justify-content-center mb-2">
+        <div class="col-md-6 col-lg-8 validator-name">
+          <p>{{item.NAME}}</p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a class="btn btn-info w-100 stake-btn" href="{{item.LINK}}" target="_blank">
+            <span class="text-black text-uppercase ">Statke now</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

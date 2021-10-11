@@ -1,0 +1,236 @@
+<div class="container pt-4">
+  <section class="mb-4">
+    <div class="card">
+      <div class="card-header text-center py-3 custom-control-inline">
+        <h5 class="mb-0 text-center">
+          <strong>Network</strong>
+        </h5>
+        <div class="row col-12 float-right">
+          <div class="col-6 input-group w-25">
+            <input [(ngModel)]="searchText" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                   aria-describedby="search-addon" />
+            <button (click)="onPageChange(1)" type="button" class="btn btn-outline-primary">search</button>
+          </div>
+          <button class="col-2 btn btn-primary" (click)="openPopup(detail, null)"><i class="fas fa-plus"></i> Add new</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover text-nowrap">
+            <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Code</th>
+              <th scope="col">Icon</th>
+              <th scope="col">Expecteday</th>
+              <th scope="col">Commission</th>
+              <th scope="col">Token Price</th>
+              <th scope="col">Status</th>
+              <th scope="col">Status Name</th>
+              <th scope="col">Order</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody *ngIf="netWorks" >
+            <tr *ngFor="let item of netWorks">
+              <th scope="row">{{item.NAME}}</th>
+              <td>{{item.CODE}}</td>
+<!--              <td><img class="max-h-50" [src]="'api/network/getFile/'+item.ID"></td>-->
+              <td><img [style.background]="item.BACKGROUND?item.BACKGROUND:''"  class="max-h-50" [src]="item.ICON"></td>
+              <td>{{item.EXPECTEDAPY}}</td>
+              <td>{{item.COMMISSION}}</td>
+              <td>{{item.TOKENPRICE}}</td>
+              <td>{{item.STATUS}}</td>
+              <td>{{item.STATUSNAME}}</td>
+              <td>{{item.ORDER}}</td>
+              <td><a (click)="openPopup(detail, item)" href="javascript:void(0)"><i class="fas fa-edit"></i></a></td>
+              <td><a (click)="delete(item)" href="javascript:void(0)"><i class="fas fa-trash-alt text-danger"></i></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-md-between align-items-md-center  pl-2 pr-2" *ngIf="totalRecords > 10">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3 d-none d-md-block">
+            <div class="dataTables_length" id="tickets-table_length"><label
+              class="d-inline-flex align-items-center">Show
+              <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                      (change)="onPageSizeChange($event.target.value)"
+                      class="custom-select-sm form-control form-control-sm mx-2">
+                <option [value]="item.id" *ngFor="let item of listRecordPaging">{{item.name}}</option>
+              </select> Row</label>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-md-0 d-none d-xl-block m-mb-8" *ngIf="totalRecords > 10">
+            Show
+            {{ totalRecords === 0 ? 0 : (pageNumber - 1) * pageSize + 1 }}
+            - {{ (pageNumber - 1) * pageSize + netWorks?.length }}
+            Tren {{ totalRecords }}
+          </div>
+
+          <div class="col-sm-12 col-md-8 col-lg-8 col-xl-6">
+            <div class="float-right mt-2" *ngIf="totalRecords > 10">
+              <ngb-pagination [collectionSize]="totalRecords" (pageChange)="onPageChange($event)"
+                              [(page)]="pageNumber" [pageSize]="pageSize" [maxSize]="msizepage" [rotate]="true">
+                <ng-template ngbPaginationPrevious> <i class="fa fa-angle-double-left font-13"></i> </ng-template>
+                <ng-template ngbPaginationNext> <i class="fa fa-angle-double-right font-13"></i> </ng-template>
+              </ngb-pagination>
+              <!--Pagination-->
+            </div>
+          </div> <!-- end col-->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Section: Sales Performance KPIs-->
+</div>
+<ng-template #detail>
+  <div class="modal-header">
+    <h4 class="modal-title">Add New NetWork
+    </h4>
+    <button type="button" class="css-close" aria-label="Close" (click)="closePoup()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <form *ngIf="formEdit" [formGroup]="formEdit">
+        <div class="form-group">
+          <label for="NAME">Name</label>
+          <input type="text" class="form-control" formControlName="NAME" id="NAME" placeholder="Name input">
+        </div>
+        <div class="form-group">
+          <label for="CODE">Code</label>
+          <input type="text" class="form-control" id="CODE" formControlName="CODE" placeholder="Code input">
+        </div>
+        <div class="form-group">
+          <label for="Icon">Icon</label>
+          <input type="file" (change)="changeFiles($event.target)" class="form-control" id="Icon" placeholder="Icon input">
+        </div>
+        <div class="form-group">
+          <label for="Expecteday">Expecteday</label>
+          <input type="number" class="form-control" id="Expecteday" formControlName="EXPECTEDAPY" placeholder="Expecteday input">
+        </div>
+        <div class="form-group">
+          <label for="Commission">Commission</label>
+          <input type="number" class="form-control" id="Commission" formControlName="COMMISSION" placeholder="Commission input">
+        </div>
+        <div class="form-group">
+          <label for="Token_Price">Token Price</label>
+          <input type="number" class="form-control" id="Token_Price" formControlName="TOKENPRICE" placeholder="Token Price input">
+        </div>
+        <div class="form-group">
+          <label for="TOTALAMOUNT">Total Amount</label>
+          <input type="number" class="form-control" id="TOTALAMOUNT" formControlName="TOTALAMOUNT" placeholder="Token Price input">
+        </div>
+        <div class="form-group">
+          <label for="Status">Status</label>
+          <select
+            name="contactMethod"
+            id="Status"
+            class="form-control"
+            formControlName="STATUS">
+            <option *ngFor="let method of status" [value]="method.value">{{ method.name }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="StatusName">Status Name</label>
+          <input type="text" class="form-control" id="StatusName"  formControlName="STATUSNAME" placeholder="Status input">
+        </div>
+        <div class="form-group">
+          <label for="ORDER">Order</label>
+          <input type="number" class="form-control" id="ORDER"  formControlName="ORDER" placeholder="Status input">
+        </div>
+        <div class="form-group">
+          <label for="BACKGROUND">Background</label>
+          <input type="color" class="form-control" id="BACKGROUND"  formControlName="BACKGROUND" placeholder="Background input">
+        </div>
+      </form>
+      <div class="col-12 border-bottom-dotted pt-2  mb-2 p-2">
+      <span class="text-uppercase  m-font-600  theme-color">Link Network</span>
+      <div class="row col-12 float-right mt-2">
+        <button class="col-3 btn btn-primary" (click)="addLink()"><i class="fas fa-plus"></i> Add Link</button>
+      </div>
+    </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Link</th>
+          <th scope="col">Status</th>
+          <th scope="col" style="width: 50px">Order</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of links; let i = index;">
+          <th scope="row">{{i}}</th>
+          <td><input [(ngModel)]="item.LINK" type="text" class="form-control" id="Link{{i}}"  placeholder="Input"></td>
+          <td><select
+            name="contactMethod"
+            id="LinkSTATUS{{i}}"
+            class="form-control"
+            [(ngModel)]="item.STATUS"
+            >
+            <option *ngFor="let method of statusShow" [value]="method.value">{{ method.name }}</option>
+          </select>
+          </td>
+          <td><input [(ngModel)]="item.ORDER" type="text" class="form-control" id="LinkORDER{{i}}"  placeholder="Input"></td>
+          <td><a (click)="deleteLink(item)" href="javascript:void(0)"><i class="fas fa-trash-alt text-danger"></i></a></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="col-12 border-bottom-dotted pt-2  mb-2 p-2">
+        <span class="text-uppercase  m-font-600  theme-color">Address</span>
+        <div class="row col-12 float-right mt-2">
+          <button class="col-3 btn btn-primary" (click)="addLinkAdress()"><i class="fas fa-plus"></i> Add Address</button>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Link</th>
+          <th scope="col">Status</th>
+          <th scope="col" style="width: 50px">Order</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of linksAddress; let i = index;">
+          <th scope="row">{{i}}</th>
+          <td><input [(ngModel)]="item.NAME" type="text" class="form-control" id="linksAddress{{i}}"  placeholder="Input"></td>
+          <td><input [(ngModel)]="item.ADRRESS" type="text" class="form-control" id="linksAddressADRRESS{{i}}"  placeholder="Input"></td>
+          <td><input [(ngModel)]="item.LINK" type="text" class="form-control" id="linksAddressLINK{{i}}"  placeholder="Input"></td>
+          <td><select
+            name="contactMethod"
+            id="linksAddressSTATUS{{i}}"
+            class="form-control"
+            [(ngModel)]="item.STATUS"
+          >
+            <option *ngFor="let method of statusShow" [value]="method.value">{{ method.name }}</option>
+          </select>
+          <td><input [(ngModel)]="item.ORDER" type="text" class="form-control" id="linksAddressORDER{{i}}"  placeholder="Input"></td>
+          <td><a (click)="deleteLinkAddress(item)" href="javascript:void(0)"><i class="fas fa-trash-alt text-danger"></i></a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closePoup()">
+      <i class="mdi mdi-close pr-1"></i>
+      Cancle
+    </button>
+    <button type="button" class="btn btn-primary" (click)="submitForm()">
+      <i class="fas fa-save pr-1"></i>
+      Submit
+    </button>
+  </div>
+</ng-template>

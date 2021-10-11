@@ -1,0 +1,73 @@
+<div class="container pt-4">
+  <section class="mb-4">
+    <div class="card">
+      <div class="card-header text-center py-3 custom-control-inline">
+        <h5 class="mb-0 text-center">
+          <strong>Contract</strong>
+        </h5>
+        <div class="row col-12 float-right">
+          <div class="col-6 input-group w-25">
+            <input  [(ngModel)]="searchText" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                   aria-describedby="search-addon" />
+            <button (click)="onPageChange(1)" type="button" class="btn btn-outline-primary">search</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover text-nowrap">
+            <thead>
+            <tr>
+              <th scope="col">FULL NAME</th>
+              <th scope="col">EMAIL</th>
+              <th scope="col">PHONE</th>
+              <th scope="col">MESSAGE</th>
+              <th scope="col">DATECREATE</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="contractMes" >
+            <tr *ngFor="let item of contractMes">
+              <th scope="row">{{item.FULLNAME}}</th>
+              <td>{{item.EMAIL}}</td>
+              <td>{{item.PHONE}}</td>
+              <td>{{item.MESSAGE}}</td>
+              <td>{{item.DATECREATE}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-md-between align-items-md-center  pl-2 pr-2" *ngIf="totalRecords > 10">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3 d-none d-md-block">
+            <div class="dataTables_length" id="tickets-table_length"><label
+              class="d-inline-flex align-items-center">Show
+              <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                      (change)="onPageSizeChange($event.target.value)"
+                      class="custom-select-sm form-control form-control-sm mx-2">
+                <option [value]="item.id" *ngFor="let item of listRecordPaging">{{item.name}}</option>
+              </select> Row</label>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-md-0 d-none d-xl-block m-mb-8" *ngIf="totalRecords > 10">
+            Show
+            {{ totalRecords === 0 ? 0 : (pageNumber - 1) * pageSize + 1 }}
+            - {{ (pageNumber - 1) * pageSize + contractMes?.length }}
+            Tren {{ totalRecords }}
+          </div>
+
+          <div class="col-sm-12 col-md-8 col-lg-8 col-xl-6">
+            <div class="float-right mt-2" *ngIf="totalRecords > 10">
+              <ngb-pagination [collectionSize]="totalRecords" (pageChange)="onPageChange($event)"
+                              [(page)]="pageNumber" [pageSize]="pageSize" [maxSize]="msizepage" [rotate]="true">
+                <ng-template ngbPaginationPrevious> <i class="fa fa-angle-double-left font-13"></i> </ng-template>
+                <ng-template ngbPaginationNext> <i class="fa fa-angle-double-right font-13"></i> </ng-template>
+              </ngb-pagination>
+              <!--Pagination-->
+            </div>
+          </div> <!-- end col-->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Section: Sales Performance KPIs-->
+</div>

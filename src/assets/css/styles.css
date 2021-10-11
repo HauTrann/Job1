@@ -2711,21 +2711,21 @@ textarea.form-control-lg {
 }
 .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
   opacity: 0.65;
-  transform: scale(0.65) translateY(-0.5rem) translateX(0rem);
+  transform: scale(0.65) translateY(-0.5rem) translateX(0rem) !important;
 }
 .form-floating > .form-control:not(:-ms-input-placeholder) ~ label {
   opacity: 0.65;
-  transform: scale(0.65) translateY(-0.5rem) translateX(0rem);
+  transform: scale(0.65) translateY(-0.5rem) translateX(0rem) !important;
 }
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
-  transform: scale(0.65) translateY(-0.5rem) translateX(0rem);
+  transform: scale(0.65) translateY(-0.5rem) translateX(0rem) !important;
 }
 .form-floating > .form-control:-webkit-autofill ~ label {
   opacity: 0.65;
-  transform: scale(0.65) translateY(-0.5rem) translateX(0rem);
+  transform: scale(0.65) translateY(-0.5rem) translateX(0rem) !important;
 }
 
 .input-group {
@@ -11396,6 +11396,7 @@ html {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     box-shadow: 0 12px 34px -11px rgb(65 62 101 / 10%);
+    background-color: white !important;
   }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.5em;
